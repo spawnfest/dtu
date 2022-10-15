@@ -9,7 +9,7 @@
 
 %% escript Entry point
 main([Code]) ->
-    io:format("Result: ~p~n", [parse_string(Code)]),
+    io:format("Result: ~p~n    ~p~n", [Code, parse_string(Code)]),
     erlang:halt(0).
 
 parse_string(Str) ->

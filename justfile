@@ -19,3 +19,30 @@ smoke-test: build
     ./dtu "foo/bar" 
     ./dtu "foo.bar/baz" 
     ./dtu "foo.bar/baz.argh" 
+    ./dtu "#[]" 
+    ./dtu "#()" 
+    ./dtu "#{}" 
+
+    ./dtu "#[1]" 
+    ./dtu "#(1)" 
+    ./dtu "#{1}" 
+
+    ./dtu "#[1, 2]" 
+    ./dtu "#(1, 2)" 
+    ./dtu "#{1, 2}" 
+
+    ./dtu "#[1,]" 
+    ./dtu "#(1,)" 
+    ./dtu "#{1,}" 
+
+    ./dtu "#[1, #{2, #()}, foo]" 
+
+    ./dtu "foo ()" 
+    ./dtu "foo () {}" 
+    ./dtu "foo {}" 
+
+    ./dtu "foo (hello)" 
+    ./dtu 'foo (42) {"hi"}'
+    ./dtu "foo {42}" 
+
+    ./dtu "foo (a: 42) {b: 42}" 

@@ -1,12 +1,15 @@
 Nonterminals
     doc tl_exprs tl_expr 
-    tagged scalar
-    node qname qname_items qname_item.
+    tagged data_literal scalar pair
+    collection list map tuple seq
+    node head body
+    qname qname_items qname_item.
 
 Terminals
     integer float string 
     lname uname 
-    slash dot hash.
+    open close open_list close_list open_map close_map
+    slash colon dot hash sep.
 
 Rootsymbol
     doc.
@@ -19,10 +22,43 @@ tl_exprs -> tl_expr tl_exprs : ['$1'|'$2'].
 tl_expr -> node : '$1'.
 
 node -> qname  : '$1'.
+node -> qname head body : {node, line('$1'), {'$1', '$2', '$3'}}.
+node -> qname head : {node, line('$1'), {'$1', '$2', []}}.
+node -> qname body : {node, line('$1'), {'$1', [], '$2'}}.
 node -> tagged : '$1'.
 
-tagged -> hash qname scalar : {tagged, line('$1'), {'$2', '$3'}}.
-tagged -> scalar : '$1'.
+head -> open close          : [].
+head -> open seq close      : '$2'.
+
+body -> open_map close_map       : [].
+body -> open_map seq close_map   : '$2'.
+
+tagged -> hash qname data_literal: {tagged, line('$1'), {'$2', '$3'}}.
+tagged -> data_literal : '$1'.
+
+data_literal -> collection : '$1'.
+data_literal -> pair       : '$1'.
+
+collection -> list  : '$1'.
+collection -> map   : '$1'.
+collection -> tuple : '$1'.
+
+list -> hash open_list close_list           : {list, line('$1'), []}.
+list -> hash open_list seq close_list       : {list, line('$1'), '$3'}.
+
+map -> hash open_map close_map              : {map, line('$1'), []}.
+map -> hash open_map seq close_map          : {map, line('$1'), '$3'}.
+
+tuple -> hash open close                    : {tuple, line('$1'), []}.
+tuple -> hash open seq close                : {tuple, line('$1'), '$3'}.
+
+seq -> node : ['$1'].
+seq -> node sep : ['$1'].
+seq -> node sep seq : ['$1' | '$3'].
+
+pair -> scalar colon scalar : {pair, line('$1'), {'$1', '$3'}}.
+pair -> qname  colon scalar : {pair, line('$1'), {'$1', '$3'}}.
+pair -> scalar : '$1'.
 
 scalar -> integer : '$1'.
 scalar -> float   : '$1'.

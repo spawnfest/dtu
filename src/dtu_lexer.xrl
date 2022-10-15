@@ -21,6 +21,7 @@ Sep         = ,
 Dot         = \.
 Hash        = #
 Slash       = /
+Colon       = :
 
 String      = "(\\\^.|\\.|[^\"])*"
 
@@ -50,6 +51,7 @@ Rules.
 {Dot}                   : make_token(dot, TokenLine, TokenChars).
 {Hash}                  : make_token(hash, TokenLine, TokenChars).
 {Slash}                 : make_token(slash, TokenLine, TokenChars).
+{Colon}                 : make_token(colon, TokenLine, TokenChars).
 
 % spaces, tabs and new lines
 {Endls}                 : skip_token.
