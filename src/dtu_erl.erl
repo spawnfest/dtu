@@ -150,6 +150,8 @@ pp_expr({node,
              pp_call_args(Args, Ctx),
              text(")")],
             Ctx);
+pp_expr({tagged, _, {{lqname, _, [{lname, _, html}]}, {map, _, Nodes}}}, Ctx) ->
+    besidel([text("<<"), quote_string(dtu_html:format(Nodes)), text(">>")], Ctx);
 pp_expr(Ast, Ctx) ->
     pp_unk("expr", Ast, Ctx).
 
