@@ -1,5 +1,27 @@
 # dtu
 
+##
+
+```sh
+just format-erl
+rebar3 as test shell
+```
+
+```erlang
+c(dtu_backend).
+{ok, Pid} = elli:start_link([{callback, dtu_backend}, {port, 3000}]).
+```
+
+```sh
+curl -v http://localhost:3000/hello/world
+# 200
+# Hello World!
+curl http://localhost:3000/hello/notfound
+# 404
+# Not Found
+```
+
+
 ## Format
 
 ### Literals

@@ -56,10 +56,11 @@ pp_expr({node, _L1, {{lqname, _L2, [{lname, _L3, 'let'}]}, [], {seq, _L4, Assign
     besidel([text("let "), join(Assignments, Ctx, fun pp_assign/2, text(","))], Ctx);
 pp_expr({node, _L1, {{lqname, _L2, [{lname, _L3, 'if'}]}, Cond, {seq, _L4, Body}}},
         Ctx) ->
-    abovel([
-    besidel([text("if ("), join(Cond, Ctx, fun pp_expr/2, text(",")), text(") {")], Ctx),
-    nestc(pp_body_exprs(Body, Ctx), Ctx),
-    text("}")], Ctx);
+    abovel([besidel([text("if ("), join(Cond, Ctx, fun pp_expr/2, text(",")), text(") {")],
+                    Ctx),
+            nestc(pp_body_exprs(Body, Ctx), Ctx),
+            text("}")],
+           Ctx);
 pp_expr({node, _L1, {{lqname, _L2, Path}, Args, {seq, _L4, []}}}, Ctx) ->
     besidel([pp_path(Path, Ctx), text("("), pp_call_args(Args, Ctx), text(")")], Ctx);
 pp_expr(Expr, Ctx) ->

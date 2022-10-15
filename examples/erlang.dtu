@@ -1,0 +1,24 @@
+module(dtu_backend)
+
+export(fn.handle(2), fn.handle_event(3))
+
+include_lib("elli/include/elli.hrl")
+
+behaviour(elli_handler)
+
+fn.handle(Req, _Args) {
+  handle(r.Req@req.method, elli_request.path(Req), Req)
+}
+
+fn.handle {
+  case (a.GET, #["hello", "world"], _Req) {
+      #(ok, #[], "Hello World!")
+  },
+  case (_, _, _Req) {
+    #(404, #[], "Not Found")
+  }
+}
+
+fn.handle_event(_Event, _Data, _Args) {
+  ok
+}

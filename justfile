@@ -16,6 +16,9 @@ format-html: build
 format-js: build
     ./dtu js examples/js.dtu
 
+format-erl: build
+    ./dtu erl examples/erlang.dtu | tee dtu_backend.erl
+
 format-todomvc: build
     ./dtu html examples/todomvc.dtu > todomvc.html
 
