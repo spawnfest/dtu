@@ -7,6 +7,9 @@ build:
 format:
     rebar3 format
 
+format-css: build
+    ./dtu css examples/css.dtu
+
 smoke-test: build test-expr
     ./dtu "42"
     ./dtu "42.5"

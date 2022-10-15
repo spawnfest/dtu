@@ -1,0 +1,22 @@
+
+All {
+  box-sizing: border-box,
+  font-size: #px 16,
+  width: #pc 100,
+  color: #rgb(10, 20, 30),
+  background-color: #hsl(50, #pc 80, #pc 40),
+}
+
+Root {
+  var.foo: #hex "ff1232",
+  color: var.foo,
+}
+
+class.foo {
+  font-family: "Helvetica",
+}
+
+id.bar {
+  margin: #[#em 1, 0],
+  padding(#em 1, #px 2, 0)
+}
