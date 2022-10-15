@@ -14,6 +14,7 @@
          atext/2,
          ntext/2,
          join/4,
+         join_no_sep/4,
          nestc/2,
          quote_string/1]).
 
@@ -95,21 +96,27 @@ pp_rule_val({string, _L1, V}, _Ctx) ->
     quote_string(V);
 pp_rule_val({list, _L1, Items}, Ctx) ->
     sep([pp_rule_val(Item, Ctx) || Item <- Items]);
+pp_rule_val({uop, _, Op, Val}, Ctx) ->
+    beside(atext(Op, Ctx), pp_rule_val(Val, Ctx));
 pp_rule_val({lqname, _L1, [{lname, _L2, var}, {lname, _L3, Name}]}, Ctx) ->
     besidel([text("var(--"), atext(Name, Ctx), text(")")], Ctx);
 pp_rule_val({tagged, _L0, {{lqname, _L1, [{lname, _L2, hex}]}, {string, _l3, V}}},
             _Ctx) ->
     beside(text("#"), text(V));
-pp_rule_val({tagged, _L0, {{lqname, _L1, [{lname, _L2, rgb}]}, {tuple, _l3, [R, G, B]}}},
+pp_rule_val({tagged, _L0, {{lqname, _L1, [{lname, _L2, rgb}]}, {tuple, _l3, Colors}}},
             Ctx) ->
-    besidel([text("rgb("),
-             sep([pp_rule_val(R, Ctx), pp_rule_val(G, Ctx), pp_rule_val(B, Ctx)]),
-             text(")")],
+    besidel([text("rgb("), join(Colors, Ctx, fun pp_rule_val/2, text(",")), text(")")], Ctx);
+pp_rule_val({tagged, _L0, {{lqname, _L1, [{lname, _L2, rgba}]}, {tuple, _l3, Colors}}},
+            Ctx) ->
+    besidel([text("rgba("), join(Colors, Ctx, fun pp_rule_val/2, text(",")), text(")")], Ctx);
+pp_rule_val({tagged, _L0, {{lqname, _L1, [{lname, _L2, hsl}]}, {tuple, _l3, Colors}}},
+            Ctx) ->
+    besidel([text("hsl("), join_no_sep(Colors, Ctx, fun pp_rule_val/2, text(" ")), text(")")],
             Ctx);
-pp_rule_val({tagged, _L0, {{lqname, _L1, [{lname, _L2, hsl}]}, {tuple, _l3, [H, S, L]}}},
+pp_rule_val({tagged, _L0, {{lqname, _L1, [{lname, _L2, hsla}]}, {tuple, _l3, Colors}}},
             Ctx) ->
-    besidel([text("hsl("),
-             sep([pp_rule_val(H, Ctx), pp_rule_val(S, Ctx), pp_rule_val(L, Ctx)]),
+    besidel([text("hsla("),
+             join_no_sep(Colors, Ctx, fun pp_rule_val/2, text(" ")),
              text(")")],
             Ctx);
 pp_rule_val({tagged, _L0, {{lqname, _L1, [{lname, _L2, Tag}]}, Value}}, Ctx) ->

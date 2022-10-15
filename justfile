@@ -16,6 +16,9 @@ format-html: build
 format-js: build
     ./dtu js examples/js.dtu
 
+format-todomvc: build
+    ./dtu html examples/todomvc.dtu > todomvc.html
+
 smoke-test: build test-expr
     ./dtu "42"
     ./dtu "42.5"

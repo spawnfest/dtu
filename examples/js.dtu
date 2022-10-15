@@ -1,8 +1,47 @@
 
 fn.main (a, *args) {
+        let {
+          byId: fn (id) { return(document.getElementById(id)) },
+          ct: fn (v) { return (document.createTextNode(v)) },
+          input: byId("new-todo"),
+          todos: byId("todo-list"),
+        },
+  input.addEventListener("keyup", fn (e) {
+    console.log("keyup", e),
+    if (e.keyCode === 13) {
+          console.log("keyup", e),
+          if (e.keyCode === 13) {
+            console.log("enter", e),
+            todos.appendChild(ce("div", #{class: "view"},
+              ce("input", #{class: "toggle", type: "checkbox"}), 
+              ce("label", #{}, ct(input.value)), 
+              ce("button", #{class: "destroy"}),
+            )),
+            input.value = "",
+          }
+    }
+  }),
+  console.log("loaded"),
   foo(a, 42, 1.5, true, "hello", #[1, 2], #{b: true}),
   a.filter(fn (v) { return (v !== 42) }),
   return (42)
+}
+
+fn.ce(tagName, attrs, *childs) {
+  let {
+    node: document.createElement(tagName),
+    entries: Object.entries(attrs)
+  },
+
+  entries.forEach(fn (#[key, val]) {
+    node.setAttribute(key, val)
+  }),
+
+  childs.forEach(fn (child) {
+    node.appendChild(child)
+  }),
+
+  return(node)
 }
 
 window.addEventListener("load", main)

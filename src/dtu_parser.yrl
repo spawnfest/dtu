@@ -37,8 +37,9 @@ body -> open_map pipe alt_seq close_map     : {alt_seq, line('$1'), '$3'}.
 tagged -> hash collection           : '$2'.
 tagged -> hash qname collection     : {tagged, line('$1'), {'$2', '$3'}}.
 tagged -> hash qname scalar         : {tagged, line('$1'), {'$2', '$3'}}.
+tagged -> hash qname symbol scalar  : {tagged, line('$1'), {'$2', {uop, line('$3'), unwrap('$3'), '$4'}}}.
 tagged -> pair                      : '$1'.
-tagged -> qname : '$1'.
+tagged -> qname                     : '$1'.
 
 collection -> list  : '$1'.
 collection -> map   : '$1'.
@@ -60,8 +61,8 @@ seq -> node sep seq : ['$1' | '$3'].
 alt_seq -> expr : ['$1'].
 alt_seq -> expr pipe alt_seq : ['$1' | '$3'].
 
-pair -> scalar colon expr: {pair, line('$1'), {'$1', '$3'}}.
-pair -> qname colon expr:  {pair, line('$1'), {'$1', '$3'}}.
+pair -> scalar colon node: {pair, line('$1'), {'$1', '$3'}}.
+pair -> qname colon node:  {pair, line('$1'), {'$1', '$3'}}.
 pair -> scalar : '$1'.
 
 scalar -> integer : '$1'.

@@ -1,0 +1,252 @@
+<html lang="en" data-framework="dtu">
+  <head>
+    <meta charset="utf-8"/>
+    <title>
+      DTU - TodoMVC
+    </title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        text-align: center;
+        font: 14px
+              "Helvetica Neue"
+              /* UNK rule val: {lqname,9,[{uname,9,'Helvetica'}]} */
+              /* UNK rule val: {lqname,9,[{uname,9,'Arial'}]} */
+              sans-serif;
+        font-weight: normal;
+        line-height: normal;
+        line-height: 1.4em;
+        background: #f5f5f5;
+        color: #4d4d4d;
+        min-width: 230px;
+        max-width: 550px;
+        margin: 0 auto;
+        font-weight: 300;
+      }
+      h1 {
+        color: rgba(175, 47, 47, 0.5);
+        font-size: 5rem;
+        font-weight: 100;
+        margin: 1em 0;
+      }
+      .new-todo {
+        padding: 1em;
+        margin: 1em 0;
+        border: none;
+        background-color: rgba(0, 0, 0, 0.03);
+        box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03);
+      }
+      .info {
+        color: #bfbfbf;
+        font-size: 10px;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+        text-align: center;
+      }
+      .filters > li {
+        list-style-type: none;
+        display: inline;
+        margin: 1em;
+      }
+      .filters > li > a {
+        text-decoration: none;
+        padding: 0.5em;
+        border: 1px solid transparent;
+        color: #555;
+      }
+      .filters > li > .selected {
+        border: 1px solid #cccccc;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="todoapp">
+      <header class="header">
+        <h1>
+          todos
+        </h1>
+        <input id="new-todo"
+               class="new-todo"
+               placeholder="What needs to be done?"
+               autofocus/>
+      </header>
+      <section class="main">
+        <input id="toggle-all"
+               class="toggle-all"
+               type="checkbox"/>
+        <label for="toggle-all">
+          Mark all as complete
+        </label>
+        <ul id="todo-list" class="todo-list">
+        </ul>
+      </section>
+      <footer class="footer">
+        <span class="todo-count">
+        </span>
+        <ul class="filters">
+          <li>
+            <a id="show-all" href="#/" class="selected">
+              All
+            </a>
+          </li>
+          <li>
+            <a id="show-active" href="#/active">
+              Active
+            </a>
+          </li>
+          <li>
+            <a id="show-completed" href="#/completed">
+              Completed
+            </a>
+          </li>
+        </ul>
+        <button id="clear-completed" class="clear-completed">
+          Clear completed
+        </button>
+      </footer>
+    </section>
+    <footer class="info">
+      <p>
+        Created by 
+        <a href="http://twitter.com/warianoguerra">
+          Mariano Guerra
+        </a>
+      </p>
+      <p>
+        Part of 
+        <a href="http://todomvc.com">
+          TodoMVC
+        </a>
+      </p>
+    </footer>
+    <script>
+      function main(_e) {
+        let byId = (id) => {
+                   return document.getElementById(id);
+                   },
+              ct = (v) => {
+                   return document.createTextNode(v);
+                   },
+              input = byId("new-todo"), todos = byId("todo-list"),
+              clearCompleted = byId("clear-completed"),
+              toggleAll = byId("toggle-all"),
+              showAll = byId("show-all"),
+              showActive = byId("show-active"),
+              showCompleted = byId("show-completed");
+        input.addEventListener("keyup",
+                                 (e) => {
+                                 console.log("keyup", e);
+                                 if (e.keyCode === 13) {
+                                   console.log("enter", e);
+                                   let node = ce("div",
+                                                   {"class": "view active"},
+                                                   ce("input",
+                                                        {"class": "toggle",
+                                                           "type": "checkbox"}),
+                                                   ce("label", {},
+                                                        ct(input.value)),
+                                                   ce("button",
+                                                        {"class": "destroy"},
+                                                        ct("X")));
+                                   todos.appendChild(node);
+                                   node.addEventListener("click",
+                                                           (e) => {
+                                                           if (e.target.tagName
+                                                               ===
+                                                               "BUTTON") {
+                                                             console.log("remove",
+                                                                           e.target.parentNode);
+                                                             e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+                                                           };
+                                                           });
+                                   input.value = "";
+                                 };
+                                 });
+        clearCompleted.addEventListener("click",
+                                          (e) => {
+                                          let checked = document.querySelectorAll(".toggle:checked");
+                                          checked.forEach((node) => {
+                                                          node.parentNode.parentNode.removeChild(node.parentNode);
+                                                          });
+                                          });
+        toggleAll.addEventListener("change",
+                                     (e) => {
+                                     let checked = document.querySelectorAll(".toggle");
+                                     checked.forEach((input) => {
+                                                     input.checked
+                                                     =
+                                                     e.target.checked;
+                                                     });
+                                     });
+        showAll.addEventListener("click",
+                                   (e) => {
+                                   removeClassToNodes("selected", ".filters a");
+                                   setDisplayToNodes("block",
+                                                       ".todo-list > div");
+                                   e.target.classList.add("selected");
+                                   });
+        showActive.addEventListener("click",
+                                      (e) => {
+                                      removeClassToNodes("selected",
+                                                           ".filters a");
+                                      setDisplayToNodes("none",
+                                                          ".todo-list > div");
+                                      setDisplayToNodes("block",
+                                                          ".todo-list > .active");
+                                      e.target.classList.add("selected");
+                                      });
+        showCompleted.addEventListener("click",
+                                         (e) => {
+                                         removeClassToNodes("selected",
+                                                              ".filters a");
+                                         setDisplayToNodes("none",
+                                                             ".todo-list > div");
+                                         setDisplayToNodes("block",
+                                                             ".todo-list > .completed");
+                                         e.target.classList.add("selected");
+                                         });
+        todos.addEventListener("change",
+                                 (e) => {
+                                 let checkbox = e.target;
+                                 if (checkbox.tagName === "INPUT") {
+                                   let task = checkbox.parentNode;
+                                   if (checkbox.checked) {
+                                     task.classList.remove("active");
+                                     task.classList.add("completed");
+                                   };
+                                   if (!checkbox.checked) {
+                                     task.classList.remove("completed");
+                                     task.classList.add("active");
+                                   };
+                                 };
+                                 });
+        console.log("loaded");
+      }
+      function removeClassToNodes(className, selector) {
+        let nodes = document.querySelectorAll(selector);
+        nodes.forEach((node) => {
+                      node.classList.remove(className);
+                      });
+      }
+      function setDisplayToNodes(display, selector) {
+        let nodes = document.querySelectorAll(selector);
+        nodes.forEach((node) => {
+                      node.style.display = display;
+                      });
+      }
+      function ce(tagName, attrs, ...childs) {
+        let node = document.createElement(tagName),
+              entries = Object.entries(attrs);
+        entries.forEach(([key, val]) => {
+                        node.setAttribute(key, val);
+                        });
+        childs.forEach((child) => {
+                       node.appendChild(child);
+                       });
+        return node;
+      }
+      window.addEventListener("load", main)
+    </script>
+  </body>
+</html>

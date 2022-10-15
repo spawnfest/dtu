@@ -45,7 +45,7 @@ pp({node, _L1, {{lqname, _L2, [{lname, _L3, Tag}]}, Attrs, Body}}, Ctx) ->
                    Ctx)
     end;
 pp({string, _L1, V}, _Ctx) ->
-    quote_string(V);
+    text(V);
 pp({integer, _L1, V}, Ctx) ->
     ntext(V, Ctx);
 pp({float, _L1, V}, Ctx) ->
