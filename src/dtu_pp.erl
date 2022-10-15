@@ -2,7 +2,7 @@
 
 -export([abovel/2, besidel/2, pp_unk_if_not_empty/2, pp_unk/3, atext/2, ntext/2, nestc/2,
          new_ctx/0, quote_string/1, quote_string/2, quote_string_raw/1, quote_string_raw/2,
-        join/4]).
+         join/4]).
 
 -record(ctx, {sub_indent = 2 :: non_neg_integer()}).
 

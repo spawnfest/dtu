@@ -1,6 +1,6 @@
 -module(dtu_css).
 
--export([format/1]).
+-export([format/1, format/2, pp_root/2, pp_rules/2]).
 
 -define(PAPER, 80).
 -define(RIBBON, 56).
@@ -18,10 +18,13 @@
          quote_string/1]).
 
 format(RootNodes) ->
-    format(RootNodes, ?PAPER, ?RIBBON).
+    format(RootNodes, dtu_pp:new_ctx()).
 
-format(RootNodes, Paper, Ribbon) ->
-    prettypr:format(pp_root(RootNodes, dtu_pp:new_ctx()), Paper, Ribbon).
+format(RootNodes, Ctx) ->
+    format(RootNodes, Ctx, ?PAPER, ?RIBBON).
+
+format(RootNodes, Ctx, Paper, Ribbon) ->
+    prettypr:format(pp_root(RootNodes, Ctx), Paper, Ribbon).
 
 pp_root(Nodes, Ctx) ->
     abovel([pp(Node, Ctx) || Node <- Nodes], Ctx).
@@ -29,7 +32,8 @@ pp_root(Nodes, Ctx) ->
 pp({node, _Line, {{lqname, _L1, [{lname, _L2, any}]}, Sels, Body}}, Ctx) ->
     abovel([beside(join(Sels, Ctx, fun pp_sel/2, text(", ")), text(" {")),
             nestc(pp_sel_body(Body, Ctx), Ctx),
-            text("}")], Ctx);
+            text("}")],
+           Ctx);
 pp({node, _Line, {QName, Head, Body}}, Ctx) ->
     abovel([besidel([pp_sel(QName, Ctx), pp_unk_if_not_empty(Head, Ctx), text(" {")], Ctx),
             nestc(pp_sel_body(Body, Ctx), Ctx),
@@ -118,6 +122,8 @@ pp_rule_val({tagged, _L0, {{lqname, _L1, [{lname, _L2, Tag}]}, Value}}, Ctx) ->
 pp_rule_val(Ast, Ctx) ->
     pp_unk("rule val", Ast, Ctx).
 
+is_valid_value_unit(V = 'rem') ->
+    {true, V};
 is_valid_value_unit(V = em) ->
     {true, V};
 is_valid_value_unit(V = pt) ->

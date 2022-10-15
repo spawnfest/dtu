@@ -1,0 +1,39 @@
+html (lang: en) {
+  head {
+    meta (charset: "utf-8"),
+    title { "My Website" },
+    link (rel: stylesheet, href: "css/style.css"),
+    meta (name: viewport, content: "width=device-width, initial-scale=1"),
+    style {
+      All {
+        box-sizing: border-box
+      },
+      body {
+        max-width: #ch 100,
+        padding-left: 0,
+        text-align: center,
+      }
+    }
+  },
+  body {
+    article {
+      section (
+        id: subscribed,
+        style: #css {
+          display: none,
+          text-align: center,
+          font-size: #rem 2
+        }
+      ) {
+          "Thanks for subscribing!",
+          br(),
+          42,
+          50.2
+      },
+      input (type: text, value: "hello world", required),
+      button (disabled) { "Click Me!" },
+      script {
+      }
+    }
+  }
+}
