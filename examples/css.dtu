@@ -20,3 +20,7 @@ id.bar {
   margin: #[#em 1, 0],
   padding(#em 1, #px 2, 0)
 }
+
+any(id.result > All, class.foo, body) {
+  margin: #em 0.5
+}
