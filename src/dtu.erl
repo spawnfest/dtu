@@ -19,6 +19,9 @@ main(["css", Path]) ->
     erlang:halt(0);
 main(["html", Path]) ->
     compile_and_print_path(Path, fun dtu_html:format/1),
+    erlang:halt(0);
+main(["js", Path]) ->
+    compile_and_print_path(Path, fun dtu_js:format/1),
     erlang:halt(0).
 
 compile_and_print_path(Path, Fn) ->

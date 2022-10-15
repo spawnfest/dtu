@@ -1,0 +1,8 @@
+
+fn.main (a, *args) {
+  foo(a, 42, 1.5, true, "hello", #[1, 2], #{b: true}),
+  a.filter(fn (v) { return (v !== 42) }),
+  return (42)
+}
+
+window.addEventListener("load", main)

@@ -13,6 +13,9 @@ format-css: build
 format-html: build
     ./dtu html examples/html.dtu
 
+format-js: build
+    ./dtu js examples/js.dtu
+
 smoke-test: build test-expr
     ./dtu "42"
     ./dtu "42.5"

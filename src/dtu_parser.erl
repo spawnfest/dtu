@@ -1571,7 +1571,7 @@ yeccpars2_18_(__Stack0) ->
 
 yeccpars2_19_(__Stack0) ->
     [___2, ___1 | __Stack] = __Stack0,
-    [begin {uop, line(___1), ___2} end | __Stack].
+    [begin {uop, line(___1), {unwrap(___1), ___2}} end | __Stack].
 
 -compile({inline, yeccpars2_20_/1}).
 
@@ -1619,7 +1619,10 @@ yeccpars2_24_(__Stack0) ->
 
 yeccpars2_27_(__Stack0) ->
     [___4, ___3, ___2, ___1 | __Stack] = __Stack0,
-    [begin {expr, line(___1), {___1, unwrap(___2), {uop, line(___3), ___4}}} end | __Stack].
+    [begin
+         {expr, line(___1), {___1, unwrap(___2), {uop, line(___3), {unwrap(___3), ___4}}}}
+     end
+     | __Stack].
 
 -compile({inline, yeccpars2_29_/1}).
 

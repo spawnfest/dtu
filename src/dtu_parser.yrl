@@ -78,9 +78,9 @@ qname_item -> lname : '$1'.
 qname_item -> uname : '$1'.
 
 expr -> tagged : '$1'.
-expr -> symbol tagged : {uop, line('$1'), '$2'}.
+expr -> symbol tagged : {uop, line('$1'), {unwrap('$1'), '$2'}}.
 expr -> expr symbol tagged : {expr, line('$1'), {'$1', unwrap('$2'), '$3'}}.
-expr -> expr symbol symbol tagged : {expr, line('$1'), {'$1', unwrap('$2'), {uop, line('$3'), '$4'}}}.
+expr -> expr symbol symbol tagged : {expr, line('$1'), {'$1', unwrap('$2'), {uop, line('$3'), {unwrap('$3'), '$4'}}}}.
 expr -> expr symbol open expr close: {expr, line('$1'), {'$1', unwrap('$2'), '$4'}}.
 
 Erlang code.

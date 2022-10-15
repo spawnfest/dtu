@@ -1,8 +1,8 @@
 -module(dtu_pp).
 
 -export([abovel/2, besidel/2, pp_unk_if_not_empty/2, pp_unk/3, atext/2, ntext/2, nestc/2,
-         new_ctx/0, quote_string/1, quote_string/2, quote_string_raw/1, quote_string_raw/2,
-         join/4]).
+         new_ctx/0, quote_string/1, quote_string/2, quote_string_raw/1, quote_string_raw/2, join/4,
+         join_no_sep/4]).
 
 -record(ctx, {sub_indent = 2 :: non_neg_integer()}).
 
@@ -59,15 +59,18 @@ quote_string_raw(V, QuoteChar) ->
     io_lib:write_string(V, QuoteChar).
 
 join(Items, Ctx, PPFun, Sep) ->
-    join(Items, Ctx, PPFun, Sep, []).
+    join(Items, Ctx, PPFun, Sep, fun(V, _Ctx) -> par(V, 2) end, []).
 
-join([], _Ctx, _PPFun, _Sep, []) ->
+join_no_sep(Items, Ctx, PPFun, Sep) ->
+    join(Items, Ctx, PPFun, Sep, fun(V, Ctx1) -> besidel(V, Ctx1) end, []).
+
+join([], _Ctx, _PPFun, _Sep, _FFun, []) ->
     empty();
-join([Item], Ctx, PPFun, _Sep, []) ->
+join([Item], Ctx, PPFun, _Sep, _FFun, []) ->
     PPFun(Item, Ctx);
-join([Item], Ctx, PPFun, _Sep, Accum) ->
-    par(lists:reverse([PPFun(Item, Ctx) | Accum]), 2);
-join([H | T = [_ | _]], Ctx, PPFun, Sep, Accum) ->
-    join(T, Ctx, PPFun, Sep, [beside(PPFun(H, Ctx), Sep) | Accum]);
-join([H | T], Ctx, PPFun, Sep, Accum) ->
-    join([T], Ctx, PPFun, Sep, [beside(PPFun(H, Ctx), Sep) | Accum]).
+join([Item], Ctx, PPFun, _Sep, FFun, Accum) ->
+    FFun(lists:reverse([PPFun(Item, Ctx) | Accum]), Ctx);
+join([H | T = [_ | _]], Ctx, PPFun, Sep, FFun, Accum) ->
+    join(T, Ctx, PPFun, Sep, FFun, [beside(PPFun(H, Ctx), Sep) | Accum]);
+join([H | T], Ctx, PPFun, Sep, FFun, Accum) ->
+    join([T], Ctx, PPFun, Sep, FFun, [beside(PPFun(H, Ctx), Sep) | Accum]).
