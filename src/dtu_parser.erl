@@ -410,7 +410,7 @@ yeccpars2_4(_S, Cat, Ss, Stack, T, Ts, Tzr) ->
 
 -dialyzer({nowarn_function, yeccpars2_5/7}).
 -compile({nowarn_unused_function,  yeccpars2_5/7}).
-yeccpars2_5(S, slash, Ss, Stack, T, Ts, Tzr) ->
+yeccpars2_5(S, at, Ss, Stack, T, Ts, Tzr) ->
  yeccpars1(S, 71, Ss, Stack, T, Ts, Tzr);
 yeccpars2_5(_S, Cat, Ss, Stack, T, Ts, Tzr) ->
  NewStack = yeccpars2_5_(Stack),
@@ -434,7 +434,7 @@ yeccpars2_7(S, open_map, Ss, Stack, T, Ts, Tzr) ->
  yeccpars1(S, 55, Ss, Stack, T, Ts, Tzr);
 yeccpars2_7(_S, Cat, Ss, Stack, T, Ts, Tzr) ->
  NewStack = yeccpars2_7_(Stack),
- yeccgoto_node(hd(Ss), Cat, Ss, NewStack, T, Ts, Tzr).
+ yeccgoto_tagged(hd(Ss), Cat, Ss, NewStack, T, Ts, Tzr).
 
 -dialyzer({nowarn_function, yeccpars2_8/7}).
 -compile({nowarn_unused_function,  yeccpars2_8/7}).
@@ -522,8 +522,9 @@ yeccpars2_19(_S, Cat, Ss, Stack, T, Ts, Tzr) ->
 -compile({nowarn_unused_function,  yeccpars2_20/7}).
 yeccpars2_20(S, colon, Ss, Stack, T, Ts, Tzr) ->
  yeccpars1(S, 21, Ss, Stack, T, Ts, Tzr);
-yeccpars2_20(_, _, _, _, T, _, _) ->
- yeccerror(T).
+yeccpars2_20(_S, Cat, Ss, Stack, T, Ts, Tzr) ->
+ NewStack = yeccpars2_20_(Stack),
+ yeccgoto_tagged(hd(Ss), Cat, Ss, NewStack, T, Ts, Tzr).
 
 %% yeccpars2_21: see yeccpars2_0
 
@@ -1358,17 +1359,17 @@ yeccpars2_6_(__Stack0) ->
 -compile({inline,yeccpars2_7_/1}).
 -dialyzer({nowarn_function, yeccpars2_7_/1}).
 -compile({nowarn_unused_function,  yeccpars2_7_/1}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 21).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 37).
 yeccpars2_7_(__Stack0) ->
  [___1 | __Stack] = __Stack0,
  [begin
-                          ___1
+                  ___1
   end | __Stack].
 
 -compile({inline,yeccpars2_8_/1}).
 -dialyzer({nowarn_function, yeccpars2_8_/1}).
 -compile({nowarn_unused_function,  yeccpars2_8_/1}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 37).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 36).
 yeccpars2_8_(__Stack0) ->
  [___1 | __Stack] = __Stack0,
  [begin
@@ -1388,7 +1389,7 @@ yeccpars2_9_(__Stack0) ->
 -compile({inline,yeccpars2_10_/1}).
 -dialyzer({nowarn_function, yeccpars2_10_/1}).
 -compile({nowarn_unused_function,  yeccpars2_10_/1}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 25).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 24).
 yeccpars2_10_(__Stack0) ->
  [___1 | __Stack] = __Stack0,
  [begin
@@ -1453,6 +1454,16 @@ yeccpars2_19_(__Stack0) ->
  [___2,___1 | __Stack] = __Stack0,
  [begin
                         {uop, line(___1), ___2}
+  end | __Stack].
+
+-compile({inline,yeccpars2_20_/1}).
+-dialyzer({nowarn_function, yeccpars2_20_/1}).
+-compile({nowarn_unused_function,  yeccpars2_20_/1}).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 37).
+yeccpars2_20_(__Stack0) ->
+ [___1 | __Stack] = __Stack0,
+ [begin
+                  ___1
   end | __Stack].
 
 -compile({inline,yeccpars2_22_/1}).
@@ -1528,7 +1539,7 @@ yeccpars2_33_(__Stack0) ->
 -compile({inline,yeccpars2_34_/1}).
 -dialyzer({nowarn_function, yeccpars2_34_/1}).
 -compile({nowarn_unused_function,  yeccpars2_34_/1}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 34).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 33).
 yeccpars2_34_(__Stack0) ->
  [___2,___1 | __Stack] = __Stack0,
  [begin
@@ -1628,7 +1639,7 @@ yeccpars2_49_(__Stack0) ->
 -compile({inline,yeccpars2_50_/1}).
 -dialyzer({nowarn_function, yeccpars2_50_/1}).
 -compile({nowarn_unused_function,  yeccpars2_50_/1}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 36).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 35).
 yeccpars2_50_(__Stack0) ->
  [___3,___2,___1 | __Stack] = __Stack0,
  [begin
@@ -1638,7 +1649,7 @@ yeccpars2_50_(__Stack0) ->
 -compile({inline,yeccpars2_51_/1}).
 -dialyzer({nowarn_function, yeccpars2_51_/1}).
 -compile({nowarn_unused_function,  yeccpars2_51_/1}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 35).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 34).
 yeccpars2_51_(__Stack0) ->
  [___3,___2,___1 | __Stack] = __Stack0,
  [begin
@@ -1648,7 +1659,7 @@ yeccpars2_51_(__Stack0) ->
 -compile({inline,yeccpars2_52_/1}).
 -dialyzer({nowarn_function, yeccpars2_52_/1}).
 -compile({nowarn_unused_function,  yeccpars2_52_/1}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 23).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 22).
 yeccpars2_52_(__Stack0) ->
  [___2,___1 | __Stack] = __Stack0,
  [begin
@@ -1658,7 +1669,7 @@ yeccpars2_52_(__Stack0) ->
 -compile({inline,yeccpars2_53_/1}).
 -dialyzer({nowarn_function, yeccpars2_53_/1}).
 -compile({nowarn_unused_function,  yeccpars2_53_/1}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 24).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 23).
 yeccpars2_53_(__Stack0) ->
  [___2,___1 | __Stack] = __Stack0,
  [begin
@@ -1668,7 +1679,7 @@ yeccpars2_53_(__Stack0) ->
 -compile({inline,yeccpars2_57_/1}).
 -dialyzer({nowarn_function, yeccpars2_57_/1}).
 -compile({nowarn_unused_function,  yeccpars2_57_/1}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 30).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 29).
 yeccpars2_57_(__Stack0) ->
  [___2,___1 | __Stack] = __Stack0,
  [begin
@@ -1688,7 +1699,7 @@ yeccpars2_59_(__Stack0) ->
 -compile({inline,yeccpars2_61_/1}).
 -dialyzer({nowarn_function, yeccpars2_61_/1}).
 -compile({nowarn_unused_function,  yeccpars2_61_/1}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 32).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 31).
 yeccpars2_61_(__Stack0) ->
  [___4,___3,___2,___1 | __Stack] = __Stack0,
  [begin
@@ -1708,7 +1719,7 @@ yeccpars2_63_(__Stack0) ->
 -compile({inline,yeccpars2_64_/1}).
 -dialyzer({nowarn_function, yeccpars2_64_/1}).
 -compile({nowarn_unused_function,  yeccpars2_64_/1}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 31).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 30).
 yeccpars2_64_(__Stack0) ->
  [___3,___2,___1 | __Stack] = __Stack0,
  [begin
@@ -1718,7 +1729,7 @@ yeccpars2_64_(__Stack0) ->
 -compile({inline,yeccpars2_66_/1}).
 -dialyzer({nowarn_function, yeccpars2_66_/1}).
 -compile({nowarn_unused_function,  yeccpars2_66_/1}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 27).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 26).
 yeccpars2_66_(__Stack0) ->
  [___2,___1 | __Stack] = __Stack0,
  [begin
@@ -1728,7 +1739,7 @@ yeccpars2_66_(__Stack0) ->
 -compile({inline,yeccpars2_67_/1}).
 -dialyzer({nowarn_function, yeccpars2_67_/1}).
 -compile({nowarn_unused_function,  yeccpars2_67_/1}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 28).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 27).
 yeccpars2_67_(__Stack0) ->
  [___3,___2,___1 | __Stack] = __Stack0,
  [begin
@@ -1738,7 +1749,7 @@ yeccpars2_67_(__Stack0) ->
 -compile({inline,yeccpars2_68_/1}).
 -dialyzer({nowarn_function, yeccpars2_68_/1}).
 -compile({nowarn_unused_function,  yeccpars2_68_/1}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 22).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_parser.yrl", 21).
 yeccpars2_68_(__Stack0) ->
  [___3,___2,___1 | __Stack] = __Stack0,
  [begin
@@ -1762,7 +1773,7 @@ yeccpars2_70_(__Stack0) ->
 yeccpars2_72_(__Stack0) ->
  [___3,___2,___1 | __Stack] = __Stack0,
  [begin
-                                        {fqname, line(___1), {___1, ___3}}
+                                     {fqname, line(___1), {___1, ___3}}
   end | __Stack].
 
 -compile({inline,yeccpars2_74_/1}).

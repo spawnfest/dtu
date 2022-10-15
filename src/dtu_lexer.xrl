@@ -8,7 +8,7 @@ String = "(\\\^.|\\.|[^\"])*"
 UName  = [A-Z\_][a-zA-Z0-9\_\-]*
 LName  = [a-z][a-zA-Z0-9\_\-]*
 
-Symbol = (<|=|>|!|%|&|\?|\*|-|\+)+
+Symbol = (<|=|>|!|%|&|\?|\*|-|\+|/|~)+
 
 Open        = \(
 Close       = \)
@@ -22,9 +22,9 @@ CloseMap    = \}
 Sep         = ,
 Dot         = \.
 Hash        = #
-Slash       = /
 Colon       = :
 Pipe        = |
+At          = @
 
 String      = "(\\\^.|\\.|[^\"])*"
 
@@ -53,7 +53,7 @@ Rules.
 {Sep}                   : make_token(sep, TokenLine, TokenChars).
 {Dot}                   : make_token(dot, TokenLine, TokenChars).
 {Hash}                  : make_token(hash, TokenLine, TokenChars).
-{Slash}                 : make_token(slash, TokenLine, TokenChars).
+{At}                    : make_token(at, TokenLine, TokenChars).
 {Colon}                 : make_token(colon, TokenLine, TokenChars).
 {Pipe}                  : make_token(pipe, TokenLine, TokenChars).
 {Symbol}                : make_token(symbol, TokenLine, TokenChars).

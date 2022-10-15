@@ -17,9 +17,9 @@ smoke-test: build test-expr
     ./dtu "foo"
     ./dtu "max-width"
     ./dtu "foo.bar"
-    ./dtu "foo/bar"
-    ./dtu "foo.bar/baz"
-    ./dtu "foo.bar/baz.argh"
+    ./dtu "foo@bar"
+    ./dtu "foo.bar@baz"
+    ./dtu "foo.bar@baz.argh"
     ./dtu "#[]"
     ./dtu "#()"
     ./dtu "#{}"
@@ -49,9 +49,15 @@ smoke-test: build test-expr
     ./dtu "foo (a: 42) {b: 42}"
 
 test-expr:
+    ./dtu "a"
+    ./dtu "-a"
+    ./dtu "a + b"
+    ./dtu "a + -b"
     ./dtu "-42"
     ./dtu '-1 + -2'
     ./dtu '1 + 2'
+    ./dtu '1 / 2'
+    ./dtu '1 ~ 2'
     ./dtu '1 + 2 * 3'
     ./dtu '1 + (2 * 3)'
     ./dtu '1 + 2 +- #ts 32'
@@ -62,4 +68,4 @@ test-alt-seq:
     ./dtu 'cond { | true: 1 | false: 0 }'
 
 test-css:
-    ./dtu 'style { All { box-sizing: "border-box" }, body { max-width: #ch 100, padding-left: 0, text-align: "center", } }'
+    ./dtu 'style { All { box-sizing: border-box }, body { max-width: #ch 100, padding-left: 0, text-align: center, } }'

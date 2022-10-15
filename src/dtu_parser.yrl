@@ -10,7 +10,7 @@ Terminals
     integer float string 
     lname uname 
     open close open_list close_list open_map close_map
-    slash colon pipe dot hash sep symbol.
+    at colon pipe dot hash sep symbol.
 
 Rootsymbol
     doc.
@@ -22,7 +22,6 @@ tl_exprs -> tl_expr tl_exprs : ['$1'|'$2'].
 
 tl_expr -> node : '$1'.
 
-node -> qname           : '$1'.
 node -> qname head body : {node, line('$1'), {'$1', '$2', '$3'}}.
 node -> qname head      : {node, line('$1'), {'$1', '$2', {seq, line('$1'), []}}}.
 node -> qname body      : {node, line('$1'), {'$1', [], '$2'}}.
@@ -39,6 +38,7 @@ tagged -> hash collection           : '$2'.
 tagged -> hash qname collection     : {tagged, line('$1'), {'$2', '$3'}}.
 tagged -> hash qname scalar         : {tagged, line('$1'), {'$2', '$3'}}.
 tagged -> pair                      : '$1'.
+tagged -> qname : '$1'.
 
 collection -> list  : '$1'.
 collection -> map   : '$1'.
@@ -68,7 +68,7 @@ scalar -> integer : '$1'.
 scalar -> float   : '$1'.
 scalar -> string  : '$1'.
 
-qname -> qname_items slash qname_items: {fqname, line('$1'), {'$1', '$3'}}.
+qname -> qname_items at qname_items: {fqname, line('$1'), {'$1', '$3'}}.
 qname -> qname_items : {lqname, line('$1'), '$1'}.
 
 qname_items -> qname_item : ['$1'].
