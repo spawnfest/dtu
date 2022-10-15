@@ -5,8 +5,10 @@ Float  = [0-9]+\.[0-9]+([eE][-+]?[0-9]+)?
 
 String = "(\\\^.|\\.|[^\"])*"
 
-UName  = [A-Z\_][a-zA-Z0-9\_]*
-LName  = [a-z][a-zA-Z0-9\_@]*
+UName  = [A-Z\_][a-zA-Z0-9\_\-]*
+LName  = [a-z][a-zA-Z0-9\_\-]*
+
+Symbol = (<|=|>|!|%|&|\?|\*|-|\+)+
 
 Open        = \(
 Close       = \)
@@ -52,6 +54,7 @@ Rules.
 {Hash}                  : make_token(hash, TokenLine, TokenChars).
 {Slash}                 : make_token(slash, TokenLine, TokenChars).
 {Colon}                 : make_token(colon, TokenLine, TokenChars).
+{Symbol}                : make_token(symbol, TokenLine, TokenChars).
 
 % spaces, tabs and new lines
 {Endls}                 : skip_token.

@@ -3,13 +3,14 @@ Nonterminals
     tagged data_literal scalar pair
     collection list map tuple seq
     node head body
+    expr
     qname qname_items qname_item.
 
 Terminals
     integer float string 
     lname uname 
     open close open_list close_list open_map close_map
-    slash colon dot hash sep.
+    slash colon dot hash sep symbol.
 
 Rootsymbol
     doc.
@@ -25,7 +26,7 @@ node -> qname  : '$1'.
 node -> qname head body : {node, line('$1'), {'$1', '$2', '$3'}}.
 node -> qname head : {node, line('$1'), {'$1', '$2', []}}.
 node -> qname body : {node, line('$1'), {'$1', [], '$2'}}.
-node -> tagged : '$1'.
+node -> expr   : '$1'.
 
 head -> open close          : [].
 head -> open seq close      : '$2'.
@@ -72,6 +73,9 @@ qname_items -> qname_item dot qname_items: ['$1' | '$3'].
 
 qname_item -> lname : '$1'.
 qname_item -> uname : '$1'.
+
+expr -> tagged : '$1'.
+expr -> tagged symbol expr : {expr, line('$1'), {'$1', unwrap('$2'), '$3'}}.
 
 Erlang code.
 

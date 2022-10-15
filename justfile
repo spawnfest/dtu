@@ -46,3 +46,6 @@ smoke-test: build
     ./dtu "foo {42}" 
 
     ./dtu "foo (a: 42) {b: 42}" 
+
+    ./dtu '1 + 2' 
+    ./dtu '1 + 2 +- #ts 32' 
