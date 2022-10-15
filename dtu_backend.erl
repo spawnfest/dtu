@@ -11,6 +11,10 @@ handle(Req, _Args) ->
 
 handle('GET', [<<"hello">>, <<"world">>], _Req) ->
   {ok, [], <<"Hello World!">>};
+  handle('POST', [<<"task">>], Req) ->
+    Name = elli_request:post_arg(<<"name">>, Req,
+                                   <<"undefined">>),
+      io:format("Name: ~s~n", [Name]), {201, [], <<"Created">>};
   handle(_, _, _Req) ->
     {404, [], <<"Not Found">>}.
 

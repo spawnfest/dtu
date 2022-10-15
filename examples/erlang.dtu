@@ -14,6 +14,11 @@ fn.handle {
   case (a.GET, #["hello", "world"], _Req) {
       #(ok, #[], "Hello World!")
   },
+  case (a.POST, #["task"], Req) {
+    Name: elli_request.post_arg("name", Req, "undefined"),
+    io.format(#s "Name: ~s~n", #[Name]),
+    #(201, #[], "Created")
+  },
   case (_, _, _Req) {
     #(404, #[], "Not Found")
   }

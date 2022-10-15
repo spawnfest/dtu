@@ -110,6 +110,8 @@ pp_expr({float, _L1, V}, Ctx) ->
     ntext(V, Ctx);
 pp_expr({string, _L1, V}, Ctx) ->
     besidel([text("<<"), quote_string(V), text(">>")], Ctx);
+pp_expr({tagged, _, {{lqname, _, [{lname, _, s}]}, {string, _L1, V}}}, _Ctx) ->
+    quote_string(V);
 pp_expr({list, _L1, V}, Ctx) ->
     pp_seq("[", "]", V, Ctx);
 pp_expr({tuple, _L1, V}, Ctx) ->
@@ -122,6 +124,8 @@ pp_expr({lqname, _, [{lname, _, Name}]}, Ctx) ->
     atext(Name, Ctx);
 pp_expr({lqname, _, [{lname, _, a}, {uname, _, Name}]}, _Ctx) ->
     quote_string(atom_to_list(Name), $');
+pp_expr({pair, _, {LHS, Expr}}, Ctx) ->
+    besidel([pp_lhs(LHS, Ctx), text(" = "), pp_expr(Expr, Ctx)], Ctx);
 % r.Req@req.method
 pp_expr({fqname,
          _,
@@ -148,6 +152,9 @@ pp_expr({node,
             Ctx);
 pp_expr(Ast, Ctx) ->
     pp_unk("expr", Ast, Ctx).
+
+pp_lhs(Ast, Ctx) ->
+    pp_expr(Ast, Ctx).
 
 pp_seq_item(Ast, Ctx) ->
     pp_expr(Ast, Ctx).

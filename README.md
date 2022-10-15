@@ -19,6 +19,9 @@ curl -v http://localhost:3000/hello/world
 curl http://localhost:3000/hello/notfound
 # 404
 # Not Found
+curl -v http://localhost:3000/task -d "name=do stuff"
+# 201
+# Created
 ```
 
 
