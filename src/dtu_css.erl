@@ -137,6 +137,8 @@ is_valid_value_unit(V = pt) ->
     {true, V};
 is_valid_value_unit(V = px) ->
     {true, V};
+is_valid_value_unit(V = ch) ->
+    {true, V};
 is_valid_value_unit(pc) ->
     {true, '%'};
 is_valid_value_unit(_) ->

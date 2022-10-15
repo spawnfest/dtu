@@ -37,6 +37,29 @@
         border: none;
         background-color: rgba(0, 0, 0, 0.03);
         box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03);
+        width: 50%;
+      }
+      #clear-completed {
+        width: 50%;
+        padding: 0.5em;
+      }
+      #clear-completed,  #toggle-all,  .view {
+        margin: 2em 0;
+      }
+      .view {
+        display: flex;
+        justify-content: space-between;
+      }
+      #show-all,  #show-completed,  #show-active {
+        min-width: 8ch;
+        display: inline-block;
+      }
+      .destroy {
+        padding: 0.15em 0.5em;
+        font-weight: bold;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
       }
       .info {
         color: #bfbfbf;
@@ -182,7 +205,7 @@
         showAll.addEventListener("click",
                                    (e) => {
                                    removeClassToNodes("selected", ".filters a");
-                                   setDisplayToNodes("block",
+                                   setDisplayToNodes("flex",
                                                        ".todo-list > div");
                                    e.target.classList.add("selected");
                                    });
@@ -192,7 +215,7 @@
                                                            ".filters a");
                                       setDisplayToNodes("none",
                                                           ".todo-list > div");
-                                      setDisplayToNodes("block",
+                                      setDisplayToNodes("flex",
                                                           ".todo-list > .active");
                                       e.target.classList.add("selected");
                                       });
@@ -202,7 +225,7 @@
                                                               ".filters a");
                                          setDisplayToNodes("none",
                                                              ".todo-list > div");
-                                         setDisplayToNodes("block",
+                                         setDisplayToNodes("flex",
                                                              ".todo-list > .completed");
                                          e.target.classList.add("selected");
                                          });
