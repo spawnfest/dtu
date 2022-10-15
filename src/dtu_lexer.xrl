@@ -24,6 +24,7 @@ Dot         = \.
 Hash        = #
 Slash       = /
 Colon       = :
+Pipe        = |
 
 String      = "(\\\^.|\\.|[^\"])*"
 
@@ -54,6 +55,7 @@ Rules.
 {Hash}                  : make_token(hash, TokenLine, TokenChars).
 {Slash}                 : make_token(slash, TokenLine, TokenChars).
 {Colon}                 : make_token(colon, TokenLine, TokenChars).
+{Pipe}                  : make_token(pipe, TokenLine, TokenChars).
 {Symbol}                : make_token(symbol, TokenLine, TokenChars).
 
 % spaces, tabs and new lines

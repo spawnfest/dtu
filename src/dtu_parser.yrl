@@ -1,7 +1,7 @@
 Nonterminals
     doc tl_exprs tl_expr 
     tagged data_literal scalar pair
-    collection list map tuple seq
+    collection list map tuple seq alt_seq
     node head body
     expr
     qname qname_items qname_item.
@@ -10,7 +10,7 @@ Terminals
     integer float string 
     lname uname 
     open close open_list close_list open_map close_map
-    slash colon dot hash sep symbol.
+    slash colon pipe dot hash sep symbol.
 
 Rootsymbol
     doc.
@@ -24,15 +24,16 @@ tl_expr -> node : '$1'.
 
 node -> qname  : '$1'.
 node -> qname head body : {node, line('$1'), {'$1', '$2', '$3'}}.
-node -> qname head : {node, line('$1'), {'$1', '$2', []}}.
+node -> qname head : {node, line('$1'), {'$1', '$2', {seq, line('$1'), []}}}.
 node -> qname body : {node, line('$1'), {'$1', [], '$2'}}.
 node -> expr   : '$1'.
 
 head -> open close          : [].
 head -> open seq close      : '$2'.
 
-body -> open_map close_map       : [].
-body -> open_map seq close_map   : '$2'.
+body -> open_map close_map       : {seq, line('$1'), []}.
+body -> open_map seq close_map   : {seq, line('$1'), '$2'}.
+body -> open_map pipe alt_seq close_map   : {alt_seq, line('$1'), '$3'}.
 
 tagged -> hash qname data_literal: {tagged, line('$1'), {'$2', '$3'}}.
 tagged -> data_literal : '$1'.
@@ -57,6 +58,9 @@ seq -> node : ['$1'].
 seq -> node sep : ['$1'].
 seq -> node sep seq : ['$1' | '$3'].
 
+alt_seq -> expr : ['$1'].
+alt_seq -> expr pipe alt_seq : ['$1' | '$3'].
+
 pair -> scalar colon scalar : {pair, line('$1'), {'$1', '$3'}}.
 pair -> qname  colon scalar : {pair, line('$1'), {'$1', '$3'}}.
 pair -> scalar : '$1'.
@@ -75,7 +79,8 @@ qname_item -> lname : '$1'.
 qname_item -> uname : '$1'.
 
 expr -> tagged : '$1'.
-expr -> tagged symbol expr : {expr, line('$1'), {'$1', unwrap('$2'), '$3'}}.
+expr -> expr symbol open expr close : {expr, line('$1'), {'$1', unwrap('$2'), '$4'}}.
+expr -> expr symbol tagged: {expr, line('$1'), {'$1', unwrap('$2'), '$3'}}.
 
 Erlang code.
 

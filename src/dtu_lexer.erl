@@ -12,7 +12,7 @@
 -export([format_error/1]).
 
 %% User code. This is placed here to allow extra attributes.
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 64).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 66).
 
 make_token(Name, Line, Chars) when is_list(Chars) ->
     {token, {Name, Line, list_to_atom(Chars)}};
@@ -352,83 +352,83 @@ yystate() -> 27.
 yystate(30, Ics, Line, Tlen, _, _) ->
     {12,Tlen,Ics,Line};
 yystate(29, [32|Ics], Line, Tlen, _, _) ->
-    yystate(17, Ics, Line, Tlen+1, 19, Tlen);
+    yystate(17, Ics, Line, Tlen+1, 20, Tlen);
 yystate(29, [13|Ics], Line, Tlen, _, _) ->
-    yystate(21, Ics, Line, Tlen+1, 19, Tlen);
+    yystate(21, Ics, Line, Tlen+1, 20, Tlen);
 yystate(29, [10|Ics], Line, Tlen, _, _) ->
-    yystate(25, Ics, Line+1, Tlen+1, 19, Tlen);
+    yystate(25, Ics, Line+1, Tlen+1, 20, Tlen);
 yystate(29, [9|Ics], Line, Tlen, _, _) ->
-    yystate(29, Ics, Line, Tlen+1, 19, Tlen);
+    yystate(29, Ics, Line, Tlen+1, 20, Tlen);
 yystate(29, Ics, Line, Tlen, _, _) ->
-    {19,Tlen,Ics,Line,29};
+    {20,Tlen,Ics,Line,29};
 yystate(28, Ics, Line, Tlen, _, _) ->
     {14,Tlen,Ics,Line};
-yystate(27, [125|Ics], Line, Tlen, Action, Alen) ->
-    yystate(23, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [123|Ics], Line, Tlen, Action, Alen) ->
-    yystate(19, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [95|Ics], Line, Tlen, Action, Alen) ->
-    yystate(3, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [93|Ics], Line, Tlen, Action, Alen) ->
-    yystate(11, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [91|Ics], Line, Tlen, Action, Alen) ->
-    yystate(7, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [63|Ics], Line, Tlen, Action, Alen) ->
-    yystate(9, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [62|Ics], Line, Tlen, Action, Alen) ->
-    yystate(9, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [61|Ics], Line, Tlen, Action, Alen) ->
-    yystate(9, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [60|Ics], Line, Tlen, Action, Alen) ->
-    yystate(9, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [58|Ics], Line, Tlen, Action, Alen) ->
-    yystate(0, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [47|Ics], Line, Tlen, Action, Alen) ->
-    yystate(28, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [46|Ics], Line, Tlen, Action, Alen) ->
-    yystate(30, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [45|Ics], Line, Tlen, Action, Alen) ->
-    yystate(9, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [44|Ics], Line, Tlen, Action, Alen) ->
-    yystate(26, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [43|Ics], Line, Tlen, Action, Alen) ->
-    yystate(9, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [42|Ics], Line, Tlen, Action, Alen) ->
-    yystate(9, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [41|Ics], Line, Tlen, Action, Alen) ->
-    yystate(22, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [40|Ics], Line, Tlen, Action, Alen) ->
-    yystate(18, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [38|Ics], Line, Tlen, Action, Alen) ->
-    yystate(9, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [37|Ics], Line, Tlen, Action, Alen) ->
-    yystate(9, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [35|Ics], Line, Tlen, Action, Alen) ->
-    yystate(14, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [34|Ics], Line, Tlen, Action, Alen) ->
-    yystate(5, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [33|Ics], Line, Tlen, Action, Alen) ->
-    yystate(9, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [32|Ics], Line, Tlen, Action, Alen) ->
-    yystate(13, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [13|Ics], Line, Tlen, Action, Alen) ->
-    yystate(21, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [10|Ics], Line, Tlen, Action, Alen) ->
-    yystate(25, Ics, Line+1, Tlen+1, Action, Alen);
-yystate(27, [9|Ics], Line, Tlen, Action, Alen) ->
-    yystate(29, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [C|Ics], Line, Tlen, Action, Alen) when C >= 48, C =< 57 ->
-    yystate(4, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [C|Ics], Line, Tlen, Action, Alen) when C >= 65, C =< 90 ->
-    yystate(3, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, [C|Ics], Line, Tlen, Action, Alen) when C >= 97, C =< 122 ->
-    yystate(15, Ics, Line, Tlen+1, Action, Alen);
-yystate(27, Ics, Line, Tlen, Action, Alen) ->
-    {Action,Alen,Tlen,Ics,Line,27};
+yystate(27, [125|Ics], Line, Tlen, _, _) ->
+    yystate(23, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [123|Ics], Line, Tlen, _, _) ->
+    yystate(19, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [95|Ics], Line, Tlen, _, _) ->
+    yystate(3, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [93|Ics], Line, Tlen, _, _) ->
+    yystate(11, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [91|Ics], Line, Tlen, _, _) ->
+    yystate(7, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [63|Ics], Line, Tlen, _, _) ->
+    yystate(9, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [62|Ics], Line, Tlen, _, _) ->
+    yystate(9, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [61|Ics], Line, Tlen, _, _) ->
+    yystate(9, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [60|Ics], Line, Tlen, _, _) ->
+    yystate(9, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [58|Ics], Line, Tlen, _, _) ->
+    yystate(0, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [47|Ics], Line, Tlen, _, _) ->
+    yystate(28, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [46|Ics], Line, Tlen, _, _) ->
+    yystate(30, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [45|Ics], Line, Tlen, _, _) ->
+    yystate(9, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [44|Ics], Line, Tlen, _, _) ->
+    yystate(26, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [43|Ics], Line, Tlen, _, _) ->
+    yystate(9, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [42|Ics], Line, Tlen, _, _) ->
+    yystate(9, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [41|Ics], Line, Tlen, _, _) ->
+    yystate(22, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [40|Ics], Line, Tlen, _, _) ->
+    yystate(18, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [38|Ics], Line, Tlen, _, _) ->
+    yystate(9, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [37|Ics], Line, Tlen, _, _) ->
+    yystate(9, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [35|Ics], Line, Tlen, _, _) ->
+    yystate(14, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [34|Ics], Line, Tlen, _, _) ->
+    yystate(5, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [33|Ics], Line, Tlen, _, _) ->
+    yystate(9, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [32|Ics], Line, Tlen, _, _) ->
+    yystate(13, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [13|Ics], Line, Tlen, _, _) ->
+    yystate(21, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [10|Ics], Line, Tlen, _, _) ->
+    yystate(25, Ics, Line+1, Tlen+1, 16, Tlen);
+yystate(27, [9|Ics], Line, Tlen, _, _) ->
+    yystate(29, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [C|Ics], Line, Tlen, _, _) when C >= 48, C =< 57 ->
+    yystate(4, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [C|Ics], Line, Tlen, _, _) when C >= 65, C =< 90 ->
+    yystate(3, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, [C|Ics], Line, Tlen, _, _) when C >= 97, C =< 122 ->
+    yystate(15, Ics, Line, Tlen+1, 16, Tlen);
+yystate(27, Ics, Line, Tlen, _, _) ->
+    {16,Tlen,Ics,Line,27};
 yystate(26, Ics, Line, Tlen, _, _) ->
     {11,Tlen,Ics,Line};
 yystate(25, Ics, Line, Tlen, _, _) ->
-    {17,Tlen,Ics,Line};
+    {18,Tlen,Ics,Line};
 yystate(24, [C|Ics], Line, Tlen, Action, Alen) when C >= 48, C =< 57 ->
     yystate(20, Ics, Line, Tlen+1, Action, Alen);
 yystate(24, Ics, Line, Tlen, Action, Alen) ->
@@ -482,15 +482,15 @@ yystate(15, Ics, Line, Tlen, _, _) ->
 yystate(14, Ics, Line, Tlen, _, _) ->
     {13,Tlen,Ics,Line};
 yystate(13, [32|Ics], Line, Tlen, _, _) ->
-    yystate(13, Ics, Line, Tlen+1, 18, Tlen);
+    yystate(13, Ics, Line, Tlen+1, 19, Tlen);
 yystate(13, [13|Ics], Line, Tlen, _, _) ->
-    yystate(21, Ics, Line, Tlen+1, 18, Tlen);
+    yystate(21, Ics, Line, Tlen+1, 19, Tlen);
 yystate(13, [10|Ics], Line, Tlen, _, _) ->
-    yystate(25, Ics, Line+1, Tlen+1, 18, Tlen);
+    yystate(25, Ics, Line+1, Tlen+1, 19, Tlen);
 yystate(13, [9|Ics], Line, Tlen, _, _) ->
-    yystate(17, Ics, Line, Tlen+1, 18, Tlen);
+    yystate(17, Ics, Line, Tlen+1, 19, Tlen);
 yystate(13, Ics, Line, Tlen, _, _) ->
-    {18,Tlen,Ics,Line,13};
+    {19,Tlen,Ics,Line,13};
 yystate(12, [101|Ics], Line, Tlen, _, _) ->
     yystate(16, Ics, Line, Tlen+1, 1, Tlen);
 yystate(12, [69|Ics], Line, Tlen, _, _) ->
@@ -518,27 +518,27 @@ yystate(10, [C|Ics], Line, Tlen, Action, Alen) when C >= 93 ->
 yystate(10, Ics, Line, Tlen, Action, Alen) ->
     {Action,Alen,Tlen,Ics,Line,10};
 yystate(9, [63|Ics], Line, Tlen, _, _) ->
-    yystate(9, Ics, Line, Tlen+1, 16, Tlen);
+    yystate(9, Ics, Line, Tlen+1, 17, Tlen);
 yystate(9, [62|Ics], Line, Tlen, _, _) ->
-    yystate(9, Ics, Line, Tlen+1, 16, Tlen);
+    yystate(9, Ics, Line, Tlen+1, 17, Tlen);
 yystate(9, [61|Ics], Line, Tlen, _, _) ->
-    yystate(9, Ics, Line, Tlen+1, 16, Tlen);
+    yystate(9, Ics, Line, Tlen+1, 17, Tlen);
 yystate(9, [60|Ics], Line, Tlen, _, _) ->
-    yystate(9, Ics, Line, Tlen+1, 16, Tlen);
+    yystate(9, Ics, Line, Tlen+1, 17, Tlen);
 yystate(9, [45|Ics], Line, Tlen, _, _) ->
-    yystate(9, Ics, Line, Tlen+1, 16, Tlen);
+    yystate(9, Ics, Line, Tlen+1, 17, Tlen);
 yystate(9, [43|Ics], Line, Tlen, _, _) ->
-    yystate(9, Ics, Line, Tlen+1, 16, Tlen);
+    yystate(9, Ics, Line, Tlen+1, 17, Tlen);
 yystate(9, [42|Ics], Line, Tlen, _, _) ->
-    yystate(9, Ics, Line, Tlen+1, 16, Tlen);
+    yystate(9, Ics, Line, Tlen+1, 17, Tlen);
 yystate(9, [38|Ics], Line, Tlen, _, _) ->
-    yystate(9, Ics, Line, Tlen+1, 16, Tlen);
+    yystate(9, Ics, Line, Tlen+1, 17, Tlen);
 yystate(9, [37|Ics], Line, Tlen, _, _) ->
-    yystate(9, Ics, Line, Tlen+1, 16, Tlen);
+    yystate(9, Ics, Line, Tlen+1, 17, Tlen);
 yystate(9, [33|Ics], Line, Tlen, _, _) ->
-    yystate(9, Ics, Line, Tlen+1, 16, Tlen);
+    yystate(9, Ics, Line, Tlen+1, 17, Tlen);
 yystate(9, Ics, Line, Tlen, _, _) ->
-    {16,Tlen,Ics,Line,9};
+    {17,Tlen,Ics,Line,9};
 yystate(8, [C|Ics], Line, Tlen, Action, Alen) when C >= 48, C =< 57 ->
     yystate(12, Ics, Line, Tlen+1, Action, Alen);
 yystate(8, Ics, Line, Tlen, Action, Alen) ->
@@ -677,112 +677,120 @@ yyaction(15, TokenLen, YYtcs, TokenLine) ->
 yyaction(16, TokenLen, YYtcs, TokenLine) ->
     TokenChars = yypre(YYtcs, TokenLen),
     yyaction_16(TokenChars, TokenLine);
-yyaction(17, _, _, _) ->
-    yyaction_17();
+yyaction(17, TokenLen, YYtcs, TokenLine) ->
+    TokenChars = yypre(YYtcs, TokenLen),
+    yyaction_17(TokenChars, TokenLine);
 yyaction(18, _, _, _) ->
     yyaction_18();
 yyaction(19, _, _, _) ->
     yyaction_19();
+yyaction(20, _, _, _) ->
+    yyaction_20();
 yyaction(_, _, _, _) -> error.
 
 -compile({inline,yyaction_0/2}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 34).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 35).
 yyaction_0(TokenChars, TokenLine) ->
      make_token (integer, TokenLine, TokenChars, fun erlang : list_to_integer / 1) .
 
 -compile({inline,yyaction_1/2}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 35).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 36).
 yyaction_1(TokenChars, TokenLine) ->
      make_token (float, TokenLine, TokenChars, fun erlang : list_to_float / 1) .
 
 -compile({inline,yyaction_2/3}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 36).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 37).
 yyaction_2(TokenChars, TokenLen, TokenLine) ->
      build_string (string, TokenChars, TokenLine, TokenLen) .
 
 -compile({inline,yyaction_3/2}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 38).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 39).
 yyaction_3(TokenChars, TokenLine) ->
      make_token (uname, TokenLine, TokenChars) .
 
 -compile({inline,yyaction_4/2}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 39).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 40).
 yyaction_4(TokenChars, TokenLine) ->
      make_token (lname, TokenLine, TokenChars) .
 
 -compile({inline,yyaction_5/2}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 41).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 42).
 yyaction_5(TokenChars, TokenLine) ->
      make_token (open, TokenLine, TokenChars) .
 
 -compile({inline,yyaction_6/2}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 42).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 43).
 yyaction_6(TokenChars, TokenLine) ->
      make_token (close, TokenLine, TokenChars) .
 
 -compile({inline,yyaction_7/2}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 44).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 45).
 yyaction_7(TokenChars, TokenLine) ->
      make_token (open_list, TokenLine, TokenChars) .
 
 -compile({inline,yyaction_8/2}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 45).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 46).
 yyaction_8(TokenChars, TokenLine) ->
      make_token (close_list, TokenLine, TokenChars) .
 
 -compile({inline,yyaction_9/2}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 47).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 48).
 yyaction_9(TokenChars, TokenLine) ->
      make_token (open_map, TokenLine, TokenChars) .
 
 -compile({inline,yyaction_10/2}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 48).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 49).
 yyaction_10(TokenChars, TokenLine) ->
      make_token (close_map, TokenLine, TokenChars) .
 
 -compile({inline,yyaction_11/2}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 50).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 51).
 yyaction_11(TokenChars, TokenLine) ->
      make_token (sep, TokenLine, TokenChars) .
 
 -compile({inline,yyaction_12/2}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 51).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 52).
 yyaction_12(TokenChars, TokenLine) ->
      make_token (dot, TokenLine, TokenChars) .
 
 -compile({inline,yyaction_13/2}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 52).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 53).
 yyaction_13(TokenChars, TokenLine) ->
      make_token (hash, TokenLine, TokenChars) .
 
 -compile({inline,yyaction_14/2}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 53).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 54).
 yyaction_14(TokenChars, TokenLine) ->
      make_token (slash, TokenLine, TokenChars) .
 
 -compile({inline,yyaction_15/2}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 54).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 55).
 yyaction_15(TokenChars, TokenLine) ->
      make_token (colon, TokenLine, TokenChars) .
 
 -compile({inline,yyaction_16/2}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 55).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 56).
 yyaction_16(TokenChars, TokenLine) ->
+     make_token (pipe, TokenLine, TokenChars) .
+
+-compile({inline,yyaction_17/2}).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 57).
+yyaction_17(TokenChars, TokenLine) ->
      make_token (symbol, TokenLine, TokenChars) .
 
--compile({inline,yyaction_17/0}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 58).
-yyaction_17() ->
-     skip_token .
-
 -compile({inline,yyaction_18/0}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 59).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 60).
 yyaction_18() ->
      skip_token .
 
 -compile({inline,yyaction_19/0}).
--file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 60).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 61).
 yyaction_19() ->
+     skip_token .
+
+-compile({inline,yyaction_20/0}).
+-file("/home/mariano/src/spawnfest/dtu/src/dtu_lexer.xrl", 62).
+yyaction_20() ->
      skip_token .
 
 -file("/nix/store/3z5jqm50yirw2x2qlffx8k8pr9ivp4kp-erlang-24.2/lib/erlang/lib/parsetools-2.3.2/include/leexinc.hrl", 313).
