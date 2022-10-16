@@ -113,9 +113,12 @@ If you open [localhost:3000](http://localhost:3000/) in your browser the app wil
 
 ### Tagged
 
+Any name can be used as a tag, the meaning is given by the translator
+
 ```clojure
 #ts 42
 #kg 42.5
+#iso.units@weight.kg 42.5
 #re "string"
 ```
 
@@ -124,52 +127,92 @@ If you open [localhost:3000](http://localhost:3000/) in your browser the app wil
 ```clojure
 foo
 foo.bar
-foo/bar
-foo.bar/baz
-foo.bar/baz.argh
+foo@bar
+foo.bar@baz
+foo.bar@baz.argh
 ```
 
 ### Collections
 
+Collections by themselves don't have any meaning, this are the default names.
+
+you may notice that all collections can have individual values and key/value
+pairs, it's the task of the translator to decide which values are valid.
+
+#### List
+
 ```clojure
 #[]
-#()
-#{}
 #[1]
-#(1)
-#{1}
 #[1, 2]
-#(1, 2)
-#{1, 2}
-#[1,]
-#(1,)
-#{1,}
+#[1, answer: 42]
 #[1, #{2, #()}, foo]
+```
+
+#### Tuple
+
+```clojure
+#()
+#(1)
+#(1, 2)
+#(1, answer: 42)
+#(1, #{2, #()}, foo)
+```
+#### Map
+
+```clojure
+#{}
+#{1}
+#{1, 2}
+#{1, answer: 42}
+#{1, #{2, #()}, foo}
 ```
 
 ### Nodes
 
+Nodes are what makes DTU better at describing logic than YAML and JSON, a node is a name
+followed optionally by a head `(...)` and optionally by a body `{...}`.
+
+Like with collections any value that can be in a sequence can be in the head or
+the body of a node.
+
 ```clojure
 foo ()
-foo () {}
-foo {}
-foo (hello)
-foo (42) {"hi"}
+foo.bar () {}
+foo@bar {}
+foo.bar@baz (hello)
+foo.bar@baz.argh (42) {"hi"}
 foo {42}
 foo (a: 42) {b: 42}
 ```
 
 #### Alt Body
 
+The body of a node can also be an `Alt Body` which is syntax to specify alternatives.
+
 ```clojure
-cond { | 1 }
-cond { | true: 1 }
-cond { | true: 1 | false: 0 }
+cond {
+    | true: 1
+    | false: 0
+}
+
+switch (name) {
+    | "bob": "yellow"
+    | "patrick": "pink"
+}
+
+type (Bool) {
+    | True
+    | False
+}
 ```
 
 ### Expressions
 
-No operator precedence, use parenthesis
+No operator precedence, use parenthesis.
+
+Any token starting with one of `< = > ! % & ? * - + / ~` is a symbol, symbols
+have no specific meaning.
 
 ```clojure
 1 + 2
@@ -178,12 +221,6 @@ No operator precedence, use parenthesis
 1 + 2 +- #ts 32
 ```
 
-Build
------
+# License
 
-    $ rebar3 escriptize
-
-Run
----
-
-    $ _build/default/bin/dtu
+MIT
