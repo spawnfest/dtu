@@ -225,6 +225,20 @@ have no specific meaning.
 1 + 2 +- #ts 32
 ```
 
-# License
+## Code Index
+
+- [dtu.erl](https://github.com/spawnfest/dtu/blob/main/src/dtu.erl): escript entry point
+
+- [dtu_lexer.xrl](https://github.com/spawnfest/dtu/blob/main/src/dtu_lexer.xrl): Lexer
+- [dtu_parser.yrl](https://github.com/spawnfest/dtu/blob/main/src/dtu_parser.yrl): Parser
+
+- [dtu_html.erl](https://github.com/spawnfest/dtu/blob/main/src/dtu_html.erl): HTML translator
+- [dtu_css.erl](https://github.com/spawnfest/dtu/blob/main/src/dtu_css.erl): CSS translator
+- [dtu_js.erl](https://github.com/spawnfest/dtu/blob/main/src/dtu_js.erl): JS translator
+- [dtu_erl.erl](https://github.com/spawnfest/dtu/blob/main/src/dtu_erl.erl): Erlang translator
+
+- [dtu_pp.erl](https://github.com/spawnfest/dtu/blob/main/src/dtu_pp.erl): translator utilities
+
+## License
 
 MIT
