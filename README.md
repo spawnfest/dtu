@@ -36,6 +36,8 @@ following languages:
 
 ## TodoMVC
 
+![TodoMVC.dtu Screenshot](https://raw.githubusercontent.com/spawnfest/dtu/main/resources/todomvc-dtu.png)
+
 To drive the testing and feature selection for each dialect I started implemented
 [TodoMVC](https://todomvc.com/), you can read the frontend code here [todomvc.dtu](https://github.com/spawnfest/dtu/blob/main/examples/todomvc.dtu).
 
