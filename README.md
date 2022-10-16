@@ -3,6 +3,10 @@
 DTU is a data format that, unlike YAML, allows to define pretty decent
 programming language.
 
+🎥 Watch overview video here 👇
+
+[![DTU Explanation Youtube Cover](https://raw.githubusercontent.com/spawnfest/dtu/main/resources/dtu-yt-cover.png)](https://www.youtube.com/watch?v=ZE3KXGSp8WE)
+
 ## Implementation
 
 DTU is implemented using:
