@@ -1,6 +1,53 @@
-# dtu
+# dtu: Data The Ultimate
 
-##
+DTU is a data format that, unlike YAML, allows to define pretty decent
+programming language.
+
+## Implementation
+
+DTU is implemented using:
+
+- [leex](https://www.erlang.org/doc/man/leex.html) for lexing
+- [yecc](https://www.erlang.org/doc/man/yecc.html) for parsing
+- [prettypr](https://www.erlang.org/doc/man/prettypr.html) for pretty printing
+- [erlang](https://www.erlang.org/) for coding
+- [rebar3](http://rebar3.org/) for the project
+- [rebar3_format](https://github.com/AdRoll/rebar3_format) for code formatting
+- [elli](https://github.com/elli-lib/elli) as the webserver for the example
+- [just](https://github.com/casey/just) as command runner
+
+## Dialects
+
+To evaluate the capabilities of the format I implemented "translators" from DTU to the
+following languages:
+
+- CSS
+  - status: pretty complete
+  - example: [css.dtu](https://github.com/spawnfest/dtu/blob/main/examples/css.dtu)
+- HTML
+  - status: pretty complete
+  - example: [html.dtu](https://github.com/spawnfest/dtu/blob/main/examples/html.dtu)
+- Javascript
+  - status: only the features I needed for TodoMVC
+  - example: [js.dtu](https://github.com/spawnfest/dtu/blob/main/examples/js.dtu)
+- Erlang
+  - status: only the features I needed for TodoMVC
+  - example: [erlang.dtu](https://github.com/spawnfest/dtu/blob/main/examples/erlang.dtu)
+
+## TodoMVC
+
+To drive the testing and feature selection for each dialect I started implemented
+[TodoMVC](https://todomvc.com/), you can read the frontend code here [todomvc.dtu](https://github.com/spawnfest/dtu/blob/main/examples/todomvc.dtu).
+
+You may notice that the javascript and css are inline in their own dialects, DTU allows
+you to switch dialects in the same file and do the right thing.
+
+For example, [the `style` node](https://github.com/spawnfest/dtu/blob/9e7fadaac668e1461c76758d977334955fafa1b6/examples/todomvc.dtu#L5) will [render the CSS in the body like here](https://github.com/spawnfest/dtu/blob/9e7fadaac668e1461c76758d977334955fafa1b6/todomvc.html#L7).
+
+The CSS in [the `style` attribute](https://github.com/spawnfest/dtu/blob/9e7fadaac668e1461c76758d977334955fafa1b6/examples/html.dtu#L22) will render it inline as a string like here.
+
+
+## Usage
 
 ```sh
 just format-erl

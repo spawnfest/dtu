@@ -1,0 +1,45 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>
+      My Website
+    </title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"/>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        max-width: 100ch;
+        padding-left: 0;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <article>
+      <section id="subscribed" style="display: none; text-align: center; font-size: 2rem;">
+        Thanks for subscribing!
+        <br/>
+        42
+        50.2
+      </section>
+      <input type="text" value="hello world" required/>
+      <button disabled>
+        Click Me!
+      </button>
+      <script>
+        function main(a, ...args) {
+          foo(a, 42, 1.5, true, "hello", [1, 2], {"b": true});
+          a.filter((v) => {
+                   return v !== 42;
+                   });
+          return 42;
+        }
+        window.addEventListener("load", main)
+      </script>
+    </article>
+  </body>
+</html>
