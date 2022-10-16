@@ -95,7 +95,7 @@ And try it with curl:
 curl -v http://localhost:3000/hello/world
 # 200
 # Hello World!
-curl http://localhost:3000/hello/notfound
+curl -v http://localhost:3000/hello/notfound
 # 404
 # Not Found
 curl -v http://localhost:3000/task -d "name=do stuff"
