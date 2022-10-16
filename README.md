@@ -41,6 +41,8 @@ following languages:
 To drive the testing and feature selection for each dialect I started implemented
 [TodoMVC](https://todomvc.com/), you can read the frontend code here [todomvc.dtu](https://github.com/spawnfest/dtu/blob/main/examples/todomvc.dtu).
 
+You can try it here: [TodoMVC DTU demo](http://marianoguerra.github.io/experiments/todomvc.html)
+
 You may notice that the javascript and css are inline in their own dialects, DTU allows
 you to switch dialects in the same file and do the right thing.
 
