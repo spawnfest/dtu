@@ -103,6 +103,8 @@ If you open [localhost:3000](http://localhost:3000/) in your browser the app wil
 
 ## Format
 
+To get a quick idea of the possibilities of the format check [erlang.dtu](https://github.com/spawnfest/dtu/blob/main/examples/erlang.dtu).
+
 ### Literals
 
 ```clojure
@@ -120,6 +122,8 @@ Any name can be used as a tag, the meaning is given by the translator
 #kg 42.5
 #iso.units@weight.kg 42.5
 #re "string"
+#set {1, 1, 2, 3}
+#date "2022-10-16T04:39:34Z"
 ```
 
 ### Names
@@ -128,8 +132,8 @@ Any name can be used as a tag, the meaning is given by the translator
 foo
 foo.bar
 foo@bar
-foo.bar@baz
-foo.bar@baz.argh
+foo.Bar@baz
+foo.bar@Baz.Argh
 ```
 
 ### Collections
